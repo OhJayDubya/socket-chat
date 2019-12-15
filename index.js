@@ -13,10 +13,10 @@ app.get('/', (req, res) => {
 app.use(express.static(__dirname + '/public'));
 
 io.on('connection', (socket) => {
-    console.log('A user has connected!');
+    socket.broadcast.emit('connection', 'A user has connected!');
 
     socket.on('disconnect', () => {
-        console.log('A user has disconnected!');
+        io.emit('disconnect', 'A user has disconnected!');
     })
 
     socket.on('chat message', msg => {

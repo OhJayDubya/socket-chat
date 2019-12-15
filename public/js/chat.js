@@ -2,6 +2,13 @@ const socket = io();
 
 const form = document.querySelector('form');
 
+const generateMessage = msg => {
+    const node = document.createElement('li');
+    const textNode = document.createTextNode(msg);
+    node.appendChild(textNode);
+    document.getElementById('messages').appendChild(node);
+}
+
 form.addEventListener('submit', event => {
     event.preventDefault();
     socket.emit('chat message',  document.getElementById('message').value)
@@ -9,8 +16,17 @@ form.addEventListener('submit', event => {
 })
 
 socket.on('chat message', msg => {
-    const node = document.createElement('li');
-    const textNode = document.createTextNode(msg);
-    node.appendChild(textNode);
-    document.getElementById('messages').appendChild(node);
+    console.log('Chat Message');
+    generateMessage(msg);
 })
+
+socket.on('connection', msg => {
+    console.log('User Connected');
+    generateMessage(msg);
+})
+
+socket.on('disconnect', msg => {
+    console.log('User Disconnected');
+    generateMessage(msg);
+});
+
