@@ -1,14 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Socket Chat</title>
-    <link type="text/css" rel="stylesheet" href="css/styles.css">
+    <link type="text/css" rel="stylesheet" href="css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
   </head>
+
   <body>
-    <ul id="messages"></ul>
-    <form action="#">
-      <input id="message" type="text" autocomplete="off" /><button type="submit">Send</button>
-    </form>
+    <div id="container">
+      <aside>
+        <ul id="users"></ul>
+      </aside>
+      <main>
+        <ul id="chat"></ul>
+        <footer>
+          <form id="chat-form" onsubmit="sendMessage(event)">
+            <textarea id="message" placeholder="Type your message"></textarea>
+            <button type="submit">Send</button>
+          </form>
+          <form id="user-form" onsubmit="setUsername(event, username)">
+            <input
+              id="username"
+              placeholder="Enter your username"
+              autocomplete="off"
+              maxlength="15"
+            />
+            <button type="submit">Submit</button>
+          </form>
+        </footer>
+      </main>
+    </div>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/chat.js"></script>
   </body>
